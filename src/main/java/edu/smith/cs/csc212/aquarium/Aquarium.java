@@ -40,35 +40,57 @@ public class Aquarium extends GFX {
 		// Don't change this here, edit the variables instead.
 		super(WIDTH, HEIGHT);
 	}
-
-	int fish1X = getWidth() + 100;
-	int fish2X = getWidth() + 300;
-
+	
+	// the reason why make these variables is to -= the x coordinate of each fish so that the fish can move
+	// set the x coordinate of each fish's beginning location
+	// make variables to pass into draw class
+	
+	// int fish1X = getWidth() + 100;
+	// int fish2X = getWidth() - 600;
+	// int fish3X = getWidth() + 100;
+	// int fish3Y = 0;
+	
+	// still a lot
+	Fish nemo = new Fish(Color.red, 350, 200, true, true);
+	Fish dory = new Fish(Color.cyan, 100, 100, false, false);
+	
 	@Override
+	// WE NEED TO MAKE FISH CLASS SO THAT WE DON'T HAVE TO REPEAT WRITING THE SAME CODE
 	public void draw(Graphics2D g) {
 		// Draw the "ocean" background.
 		g.setColor(Color.blue);
 		g.fillRect(0, 0, getWidth(), getHeight());
 
+
+		// DrawFish.facingLeft(g, nemo.color, nemo.x, nemo.y);
+		nemo.draw(g);
+		// I want every fish to move 
+		// nemo.swim();
+		dory.draw(g);
+		
 		// Draw the fish!
-		DrawFish.facingLeft(g, Color.yellow, fish1X, 200);
+		// DrawFish.facingLeft(g, Color.yellow, fish1X, 200);
 		// Draw the confused fish!
-		DrawFish.facingRight(g, Color.green, fish2X, 300);
+		// DrawFish.facingRight(g, Color.green, fish2X, 150);
 
 		// What if we wanted this little fish to swim, too?
-		DrawFish.smallFacingLeft(g, Color.red, 200, 100);
+		// DrawFish.smallFacingLeft(g, Color.red, fish3X, fish3Y);
 
 		// Draw our snail!
 		algorithm.draw(g);
 
-		// Move the fish!
-		fish1X -= 1;
-		fish2X -= 2;
+		// Move the fish
+		// Can it be run without for/while loop?
+		// fish1X -= 1;
+		// fish2X += 2;
+		// fish3X -= 3;
+		// Now fish can move diagonally!
+		// fish3Y += 3;
+		
 	}
 
 	public static void main(String[] args) {
 		// Uncomment this to make it go slower!
-		// GFX.FPS = 10;
 		// This is potentially helpful for debugging movement if there are too many print statements!
 
 		// Note that we can store an Aquarium in a variable of type GFX because Aquarium
