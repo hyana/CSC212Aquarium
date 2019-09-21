@@ -23,6 +23,8 @@ public class Snail {
 	 * The position of the Snail; y-coordinate.
 	 */
 	public int y;
+	
+	
 
 	/**
 	 * Create a snail at (sx, sy) with position s.
@@ -50,9 +52,35 @@ public class Snail {
 	 * TODO: move the snail about.
 	 */
 	public void move() {
-
+	if ("bottom".equals(this.direction)) {
+		this.x -= 1;
+		if (this.x == 0) {
+			this.x = 40;
+			this.y = 430;
+			this.direction = "left";
+		}
+	} else if ("top".equals(this.direction)) {
+		this.x += 1;
+		if (this.x == 500) {
+			this.x = 460;
+			this.direction = "right";
+		}
+	} else if ("left".equals(this.direction)) {
+		this.y -= 1;
+		if (this.y == 0) {
+			this.y = 50;
+			this.x = 40;
+			this.direction = "top";
+		}
+	} else if ("right".equals(this.direction)) {
+		this.y += 1;
+		if (this.y == 500) {
+			this.y = 460;
+			this.x = 460;
+			this.direction = "bottom";
+		}
 	}
-
+	}
 	/**
 	 * Draw the snail at the current setup.
 	 * 
@@ -61,7 +89,6 @@ public class Snail {
 	public void draw(Graphics2D g) {
 		// By calling move here, if we want to move our snail, we can do so.
 		// Move gets called by draw, so whenever draw gets called.
-		this.move();
 
 		// By making a new Graphics2D object, we can move everything that gets drawn to
 		// it.
@@ -76,19 +103,23 @@ public class Snail {
 			position.scale(-1, -1);
 			drawSnail(position, Color.red, Color.white, Color.black);
 		} else if ("left".equals(this.direction)) {
-			// Oh no, radians.
 			position.rotate(Math.PI / 2);
 			drawSnail(position, Color.red, Color.white, Color.black);
 		} else { // we don't have to say "right" here.
-			// Oh no, radians.
 			position.rotate(-Math.PI / 2);
 			drawSnail(position, Color.red, Color.white, Color.black);
 		}
 
 		// It's OK if you forget this, Java will eventually notice, but better to have
-		// it!
-		position.dispose();
-	}
+		// it! 
+		
+		this.move();
+
+				
+		
+
+			position.dispose();
+	}	
 
 	/**
 	 * Kudos to Group 7, (Fall 2018).
@@ -139,5 +170,33 @@ public class Snail {
 		g.fill(shell3);
 		g.setColor(Color.black);
 		g.draw(shell3);
+	}
+
+	public void clean(Graphics2D g) {
+		Graphics2D position = (Graphics2D) g.create();
+		position.translate(x, y);
+		
+		Shape eyePupilL = new Rectangle2D.Double(-4, -26, 10, 4);
+		Shape eyePupilR = new Rectangle2D.Double(30, -26 + 4, 12, 4);
+		g.fill(eyePupilL);
+		g.fill(eyePupilR);
+		if ("bottom".equals(this.direction)) {
+			drawSnail(position, Color.red, Color.white, Color.black);
+		} else if ("top".equals(this.direction)) {
+			position.scale(-1, -1);
+			drawSnail(position, Color.red, Color.white, Color.black);
+		} else if ("left".equals(this.direction)) {
+			position.rotate(Math.PI / 2);
+			drawSnail(position, Color.red, Color.white, Color.black);
+		} else { // we don't have to say "right" here.
+			position.rotate(-Math.PI / 2);
+			drawSnail(position, Color.red, Color.white, Color.black);
+		}
+
+
+		
+		
+		// TODO Auto-generated method stub
+		
 	}
 }
